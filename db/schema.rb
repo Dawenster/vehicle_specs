@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826235757) do
+ActiveRecord::Schema.define(version: 20150827000148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,26 @@ ActiveRecord::Schema.define(version: 20150826235757) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "major_section_id"
+  end
+
+  create_table "specs", force: true do |t|
+    t.string   "name"
+    t.string   "spec_type"
+    t.text     "description"
+    t.string   "range_min"
+    t.string   "range_max"
+    t.string   "range_interval"
+    t.string   "range_default"
+    t.string   "unit_type"
+    t.string   "unit_of_measure"
+    t.string   "uom_abbreviation"
+    t.string   "default_precision"
+    t.text     "comments"
+    t.integer  "vehicle_id"
+    t.integer  "major_section_id"
+    t.integer  "minor_section_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "vehicles", force: true do |t|
