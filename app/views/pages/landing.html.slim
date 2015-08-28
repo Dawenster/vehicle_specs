@@ -9,9 +9,9 @@
     #vehicle-accordion.panel-group aria-multiselectable="true" role="tablist" 
       - @vehicle.major_sections.each_with_index do |major_section, i|
         .panel.panel-default
-          #headingOne.panel-heading role="tab" 
+          #headingOne.panel-heading aria-controls="collapse-#{i}" aria-expanded="true" data-toggle="collapse" href="#collapse-#{i}" role="button" 
             h4.panel-title
-              a aria-controls="collapse-#{i}" aria-expanded="true" data-toggle="collapse" href="#collapse-#{i}" role="button" 
+              a
                 = major_section.name
 
           .panel-collapse.collapse aria-labelledby="heading-#{i}" role="tabpanel" id="collapse-#{i}" class="#{'in' if i == 0}"

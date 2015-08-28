@@ -3,6 +3,10 @@
 #vehicle-accordion {
   .panel-heading {
     background-color: $main-background;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   .panel-body {
