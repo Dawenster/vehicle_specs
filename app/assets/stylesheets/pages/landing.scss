@@ -1,0 +1,21 @@
+@import "colours.scss";
+
+#vehicle-accordion {
+  .panel-heading {
+    background-color: $main-background;
+  }
+
+  .panel-body {
+    padding: 0px;
+
+    .minor-section-header {
+      background-color: $secondary-background;
+      margin-top: 0px;
+      padding: 5px 20px;
+    }
+
+    .specs-holder {
+      padding: 20px;
+    }
+  }
+}

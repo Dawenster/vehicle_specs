@@ -1,0 +1,12 @@
+@import "colours.scss";
+
+.navbar {
+  background-color: $main-background !important;
+
+  .nav {
+    li.active a,
+    li.dropdown.open .dropdown-toggle {
+      background-color: $secondary-background !important;
+    }
+  }
+}
