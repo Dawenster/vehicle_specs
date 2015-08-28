@@ -71,6 +71,11 @@ app.controller('LandingCtrl', ['$scope', function($scope) {
         }
       });
     }
-
   };
+
+  $scope.dropdownSelected = function($event) {
+    var ele = $($event.target)
+    var selectedText = ele.text()
+    ele.parents(".slider-dropdown").find(".button-text").text(selectedText)
+  }
 }]);
