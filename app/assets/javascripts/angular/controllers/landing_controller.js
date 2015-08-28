@@ -15,9 +15,13 @@ app.controller('LandingCtrl', ['$scope', function($scope) {
     var rangePrecision    = sliderHolder.attr("data-range-default-precision")
     var fractionBase      = parseInt(sliderHolder.attr("data-fraction-base"))
 
+    var steps = (rangeMax - rangeMin) / rangeInterval
+    var stepsToDisplay = 5
     var decimalUse = null
     if (unitType == "Decimal") {
       decimalUse = true
+    } else if (unitType == "Fraction") {
+      stepsToDisplay = 5
     } else {
       decimalUse = false
     }
@@ -32,7 +36,6 @@ app.controller('LandingCtrl', ['$scope', function($scope) {
       connect = 'lower'
     }
 
-    var steps = (rangeMax - rangeMin) / rangeInterval
     if (steps > 10) {
       noUiSlider.create(sliders[i], {
         start: start,
@@ -45,8 +48,8 @@ app.controller('LandingCtrl', ['$scope', function($scope) {
         },
         pips: {
           mode: 'count',
-          values: 5,
-          density: 5,
+          values: stepsToDisplay,
+          density: 1/15 * 100,
           stepped: true
         }
       });
