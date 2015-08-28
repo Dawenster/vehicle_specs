@@ -1,0 +1,1 @@
+angular.module('vehiclespec.services', []);

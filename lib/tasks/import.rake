@@ -72,7 +72,9 @@ def find_or_create_spec(vehicle, major_section, minor_section, row)
       :range_max => row[:range_max],
       :range_interval => row[:range_interval],
       :range_default => row[:range_default],
+      :range_default_multi => row[:range_default_multi],
       :unit_type => row[:unit_type],
+      :fraction_base => row[:fraction_base],
       :unit_of_measure => row[:unit_of_measure],
       :uom_abbreviation => row[:uom_abbreviation],
       :default_precision => row[:default_precision],
@@ -120,6 +122,8 @@ def row_hash(row)
   hash[:range_default_multi]   = row[column]
   column += 1
   hash[:unit_type]             = row[column]
+  column += 1
+  hash[:fraction_base]         = row[column]
   column += 1
   hash[:unit_of_measure]       = row[column]
   column += 1

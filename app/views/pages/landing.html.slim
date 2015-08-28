@@ -1,4 +1,4 @@
-.row
+.row ng-controller="LandingCtrl"
   .col-xs-12
     h1
       | Municipal Vehicle Specs
@@ -22,6 +22,17 @@
                     = minor_section.name
 
                 .specs-holder
-                  - minor_section.specs.each do |spec|
-                    p
-                      = spec.name
+                  - minor_section.specs.each_with_index do |spec, spec_index|
+                    .row
+                      .col-xs-12.col-sm-6
+                        .spec-details-holder style="#{'margin-top: 0px;' if spec_index == 0}"
+                          b
+                            = spec.name
+                          - if spec.spec_type == "Range"
+                            .spec-content-holder data-unit-type="#{spec.unit_type}" data-range-min="#{spec.range_min}" data-range-max="#{spec.range_max}" data-range-interval="#{spec.range_interval}" data-range-default="#{spec.range_default}" data-range-default-multi="#{spec.range_default_multi}" data-range-default-precision="#{spec.default_precision}" data-fraction-base="#{spec.fraction_base}"
+                              .range-holder
+                                .slider
+
+                          - else
+                            .spec-content-holder
+                              = ""

@@ -16,6 +16,18 @@
 
     .specs-holder {
       padding: 20px;
+
+      .spec-details-holder {
+        margin-top: 20px;
+
+        .spec-content-holder {
+          margin-top: 20px;
+
+          .range-holder {
+            margin-left: 15px;
+          }
+        }
+      }
     }
   }
 }
