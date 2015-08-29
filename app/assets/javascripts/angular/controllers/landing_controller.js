@@ -5,25 +5,16 @@ app.controller('LandingCtrl', ['$scope', function($scope) {
 
   for (var i = 0; i < sliders.length; i++) {
     var sliderHolder = $(sliders[i]).parents(".spec-content-holder")
+    var spec = specDetails(sliderHolder)
 
-    var unitType          = sliderHolder.attr("data-unit-type")
-    var rangeMin          = parseInt(sliderHolder.attr("data-range-min"))
-    var rangeMax          = parseInt(sliderHolder.attr("data-range-max"))
-    var rangeInterval     = parseInt(sliderHolder.attr("data-range-interval"))
-    var rangeDefault      = parseInt(sliderHolder.attr("data-range-default"))
-    var rangeDefaultMulti = parseInt(sliderHolder.attr("data-range-default-multi"))
-    var rangePrecision    = sliderHolder.attr("data-range-default-precision")
-    var fractionBase      = parseInt(sliderHolder.attr("data-fraction-base"))
-    var uomAbbreviation   = sliderHolder.attr("data-uom-abbreviation")
-
-    var steps = (rangeMax - rangeMin) / rangeInterval
+    var steps = (spec.rangeMax - spec.rangeMin) / spec.rangeInterval
     var stepsToDisplay = 5
     var decimalUse = null
     var decimals = 0
-    if (unitType == "Decimal") {
+    if (spec.unitType == "Decimal") {
       decimalUse = true
       decimals = 1
-    } else if (unitType == "Fraction") {
+    } else if (spec.unitType == "Fraction") {
       stepsToDisplay = 5
     } else {
       decimalUse = false
@@ -31,11 +22,11 @@ app.controller('LandingCtrl', ['$scope', function($scope) {
 
     var start = null
     var connect = null
-    if (rangePrecision == "Within (Dual range)") {
-      start = [rangeDefault, rangeDefaultMulti]
+    if (spec.rangePrecision == "Within (Dual range)") {
+      start = [spec.rangeDefault, spec.rangeDefaultMulti]
       connect = true
     } else {
-      start = rangeDefault
+      start = spec.rangeDefault
       connect = 'lower'
     }
 
@@ -43,11 +34,11 @@ app.controller('LandingCtrl', ['$scope', function($scope) {
       noUiSlider.create(sliders[i], {
         start: start,
         decimals: decimalUse,
-        step: rangeInterval,
+        step: spec.rangeInterval,
         connect: connect,
         range: {
-          'min':  rangeMin,
-          'max':  rangeMax
+          'min':  spec.rangeMin,
+          'max':  spec.rangeMax
         },
         pips: {
           mode: 'count',
@@ -57,18 +48,18 @@ app.controller('LandingCtrl', ['$scope', function($scope) {
         },
         format: wNumb({
           decimals: decimals,
-          postfix: ' ' + uomAbbreviation
+          postfix: ' ' + spec.uomAbbreviation
         })
       });
     } else {
       noUiSlider.create(sliders[i], {
         start: start,
         decimals: decimalUse,
-        step: rangeInterval,
+        step: spec.rangeInterval,
         connect: connect,
         range: {
-          'min':  rangeMin,
-          'max':  rangeMax
+          'min':  spec.rangeMin,
+          'max':  spec.rangeMax
         },
         pips: {
           mode: 'steps',
@@ -77,7 +68,7 @@ app.controller('LandingCtrl', ['$scope', function($scope) {
         },
         format: wNumb({
           decimals: decimals,
-          postfix: ' ' + uomAbbreviation
+          postfix: ' ' + spec.uomAbbreviation
         })
       });
     }
@@ -85,13 +76,24 @@ app.controller('LandingCtrl', ['$scope', function($scope) {
     sliders[i].noUiSlider.on('update', function(values, handle){
       var parentEle = $(event.target).parents(".spec-content-holder")
       var unitType = parentEle.attr("data-unit-type")
+      var value1 = null
+      var value2 = null
 
       if (values.length > 1) {
-        var value1 = roundWithUOM(values[0])
-        var value2 = roundWithUOM(values[1])
+        if (unitType == "Decimal") {
+          value1 = values[0]
+          value2 = values[1]
+        } else {
+          value1 = roundWithUOM(values[0])
+          value2 = roundWithUOM(values[1])
+        }
         parentEle.find(".selected-text").text("From: " + value1 + " to " + value2)
       } else {
-        var value1 = roundWithUOM(values[0])
+        if (unitType == "Decimal") {
+          value1 = values[0]
+        } else {
+          value1 = roundWithUOM(values[0])
+        }
         parentEle.find(".selected-text").text(value1)
       }
     });
@@ -99,12 +101,54 @@ app.controller('LandingCtrl', ['$scope', function($scope) {
 
   $scope.dropdownSelected = function($event) {
     var ele = $($event.target)
+    var eleParent = ele.parents(".spec-content-holder")
+    var sliderHolder = eleParent.find(".slider")
+    var spec = specDetails(sliderHolder)
+
     var selectedText = ele.text()
     ele.parents(".slider-dropdown").find(".button-text").text(selectedText)
+
+    if (spec.defaultPrecision == "Within (Dual range)") {
+      noUiSlider.create(sliders[i], {
+        start: start,
+        decimals: decimalUse,
+        step: spec.rangeInterval,
+        connect: connect,
+        range: {
+          'min':  spec.rangeMin,
+          'max':  spec.rangeMax
+        },
+        pips: {
+          mode: 'steps',
+          density: 100,
+          stepped: true
+        },
+        format: wNumb({
+          decimals: decimals,
+          postfix: ' ' + spec.uomAbbreviation
+        })
+      });
+    } else {
+
+    }
   }
 
   function roundWithUOM(value) {
     valueArr = value.split(" ")
     return Math.round(valueArr[0]) + " " + valueArr[1]
+  }
+
+  function specDetails(slider) {
+    var spec = {}
+    spec["unitType"]          = slider.attr("data-unit-type")
+    spec["rangeMin"]          = parseInt(slider.attr("data-range-min"))
+    spec["rangeMax"]          = parseInt(slider.attr("data-range-max"))
+    spec["rangeInterval"]     = parseInt(slider.attr("data-range-interval"))
+    spec["rangeDefault"]      = parseInt(slider.attr("data-range-default"))
+    spec["rangeDefaultMulti"] = parseInt(slider.attr("data-range-default-multi"))
+    spec["rangePrecision"]    = slider.attr("data-range-default-precision")
+    spec["fractionBase"]      = parseInt(slider.attr("data-fraction-base"))
+    spec["uomAbbreviation"]   = slider.attr("data-uom-abbreviation")
+    return spec
   }
 }]);
