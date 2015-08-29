@@ -3,4 +3,8 @@ class Spec < ActiveRecord::Base
   belongs_to :vehicle
   belongs_to :major_section
   belongs_to :minor_section
+
+  def unique_id
+    "#{self.vehicle.id}-#{self.major_section.id}-#{self.minor_section.id}-#{self.id}"
+  end
 end

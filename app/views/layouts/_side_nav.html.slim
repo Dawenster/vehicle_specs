@@ -1,0 +1,21 @@
+.side-nav-holder aria-multiselectable="true" role="tablist" ng-controller="SideBarNavController"
+  - @vehicle.major_sections.each_with_index do |major_section, i|
+    ul.nav.nav-pills.nav-stacked.major-section-side-nav
+      li role="presentation"
+        a href="##{major_section.unique_id}"
+          = major_section.name
+
+      .major-section-contents class="#{major_section.unique_id}"
+        - major_section.minor_sections.each do |minor_section|
+          li
+            ul.nav.nav-pills.nav-stacked.minor-section-side-nav
+              li role="presentation"
+                a href="##{minor_section.unique_id}"
+                  = minor_section.name
+
+              - minor_section.specs.each do |spec|
+                li
+                  ul.nav.nav-pills.nav-stacked.spec-side-nav
+                    li role="presentation"
+                      a href="##{spec.unique_id}"
+                        = spec.name
