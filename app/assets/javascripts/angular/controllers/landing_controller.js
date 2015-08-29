@@ -31,19 +31,24 @@ app.controller('LandingCtrl', ['$scope', function($scope) {
     slider.remove()
 
     var dualRangeText = "Within (Dual range)"
+    var detailsForSlider = sliderDetails(spec, selectedText)
+    var textArea = sliderHolder.find(".selected-text")
 
-    if (selectedText == dualRangeText) {
-      var detailsForSlider = sliderDetails(spec, dualRangeText)
+    if (selectedText == dualRangeText || detailsForSlider.steps > 10) {
       createSlider(newSlider, spec, detailsForSlider, "count")
-      var textArea = sliderHolder.find(".selected-text")
-      textArea.text(initialRangeTextWithUom(detailsForSlider.start, spec))
+      textArea.text(initialDualRangeTextWithUom(detailsForSlider.start, spec))
     } else {
-
+      createSlider(newSlider, spec, detailsForSlider, "steps")
+      textArea.text(initialRangeTextWithUom(detailsForSlider.start, spec))
     }
     initiateSliderUpdate(newSlider)
   }
 
   function initialRangeTextWithUom(start, spec) {
+    return start + " " + spec.uomAbbreviation
+  }
+
+  function initialDualRangeTextWithUom(start, spec) {
     return "From: " + start[0] + " " + spec.uomAbbreviation + " to " + start[1] + " " + spec.uomAbbreviation
   }
 
