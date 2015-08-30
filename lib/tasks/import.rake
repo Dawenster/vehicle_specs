@@ -78,6 +78,7 @@ def find_or_create_spec(vehicle, major_section, minor_section, row)
       :unit_of_measure => row[:unit_of_measure],
       :uom_abbreviation => row[:uom_abbreviation],
       :default_precision => row[:default_precision],
+      :boolean_default => row[:boolean_default] == "TRUE" ? true : false,
       :comments => row[:comments],
       :vehicle => vehicle,
       :major_section => major_section,
@@ -130,6 +131,8 @@ def row_hash(row)
   hash[:uom_abbreviation]      = row[column]
   column += 1
   hash[:default_precision]     = row[column]
+  column += 1
+  hash[:boolean_default]       = row[column]
   column += 1
   hash[:comments]              = row[column]
   # Skip an extra column
