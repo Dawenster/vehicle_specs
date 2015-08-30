@@ -39,21 +39,25 @@ app.controller('NewProjectCtrl', ['$scope', 'Range', 'Dropdown', function($scope
     for (var i = 0; i < specs.length; i++) {
       var spec = $(specs[i])
       var specType = spec.attr("data-spec-type")
+      var specObj = {}
+      specObj["specName"] = spec.attr("data-spec-name")
+
       switch (specType) {
         case "Range":
-          formattedSpecs.push(pullRangeSpecDetails(spec))
+          specObj["selection"] = pullRangeSpecDetails(spec)
           break;
         case "Dropdown":
+          specObj["selection"] = pullDropdownSpecDetails(spec)
           break;
-        case "Boolean": 
+        case "Boolean":
           break;
       }
+      formattedSpecs.push(specObj)
     };
     return formattedSpecs
   }
 
   function pullRangeSpecDetails(spec) {
-    var specName = spec.attr("data-spec-name")
     var details = ""
     var buttonText = spec.find(".button-text").text()
     var selectionText = spec.find(".selected-text").text()
@@ -62,10 +66,11 @@ app.controller('NewProjectCtrl', ['$scope', 'Range', 'Dropdown', function($scope
     } else {
       details = buttonText + ": " + selectionText
     }
-    return {
-      specName: specName,
-      selection: details
-    }
+    return details
+  }
+
+  function pullDropdownSpecDetails(spec) {
+    return spec.find(".button-text").text()
   }
 }]);
 
