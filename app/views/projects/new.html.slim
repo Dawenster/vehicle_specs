@@ -9,7 +9,7 @@
     #vehicle-accordion.panel-group aria-multiselectable="true" role="tablist" 
       - @vehicle.major_sections.each_with_index do |major_section, i|
         .panel.panel-default
-          .panel-heading aria-controls="collapse-#{i}" aria-expanded="true" data-toggle="collapse" href="#collapse-#{i}" role="button" id="#{major_section.unique_id}"
+          .panel-heading aria-controls="collapse-#{i}" aria-expanded="true" data-toggle="collapse" href="#collapse-#{i}" role="button" id="#{major_section.unique_id}" data-parent="#vehicle-accordion"
             h4.panel-title
               a
                 = major_section.name
