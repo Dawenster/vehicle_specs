@@ -34,6 +34,9 @@
                           - elsif spec.spec_type == "Dropdown"
                             = render "dropdown_spec", :spec => spec
 
+                          - elsif spec.spec_type == "Boolean"
+                            = render "boolean_spec", :spec => spec
+
                     hr
 
   .col-xs-12.col-sm-3 scrollspy=""
