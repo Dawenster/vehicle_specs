@@ -1,6 +1,6 @@
 var app = angular.module('vehiclespec');
 
-app.controller('SideBarNavController', ['$scope', function($scope) {
+app.controller('SideBarNavCtrl', ['$scope', function($scope) {
   $(".major-section-contents").hide()
   $($(".major-section-contents")[0]).show()
 
