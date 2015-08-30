@@ -50,6 +50,7 @@ app.controller('NewProjectCtrl', ['$scope', 'Range', 'Dropdown', function($scope
           specObj["selection"] = pullDropdownSpecDetails(spec)
           break;
         case "Boolean":
+          specObj["selection"] = pullBooleanSpecDetails(spec)
           break;
       }
       formattedSpecs.push(specObj)
@@ -71,6 +72,11 @@ app.controller('NewProjectCtrl', ['$scope', 'Range', 'Dropdown', function($scope
 
   function pullDropdownSpecDetails(spec) {
     return spec.find(".button-text").text()
+  }
+
+  function pullBooleanSpecDetails(spec) {
+    var checkedValue = spec.find('input.spec-radio[type=radio]:checked').val()
+    return checkedValue
   }
 }]);
 
