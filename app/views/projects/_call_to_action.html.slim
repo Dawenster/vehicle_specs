@@ -1,5 +1,10 @@
-.btn.btn-dark
-  | Generate Specs
+.call-to-action-holder
+  .btn.btn-dark
+    | Generate Specs
 
-.btn.btn-dropdown
-  | Preview
+  .btn.btn-dropdown ng-show="showBuilder" ng-click="preview()"
+    | Preview
+
+  .btn.btn-dropdown ng-show="!showBuilder" ng-click="backToBuild()"
+    i.fa.fa-angle-left
+    | Back to Build

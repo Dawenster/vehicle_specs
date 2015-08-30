@@ -5,6 +5,8 @@ app.controller('NewProjectCtrl', ['$scope', 'Range', 'Dropdown', function($scope
   // hideSideNavMajorSections()
   Range.setupRangeSlider()
 
+  $scope.showBuilder = true
+
   $scope.rangeDropdownSelected = function($event) {
     Range.rangeDropdownSelected($event)
   }
@@ -20,5 +22,13 @@ app.controller('NewProjectCtrl', ['$scope', 'Range', 'Dropdown', function($scope
 
   function hideSideNavMajorSections() {
     $(".major-section-contents").hide()
+  }
+
+  $scope.preview = function() {
+    $scope.showBuilder = false
+  }
+
+  $scope.backToBuild = function() {
+    $scope.showBuilder = true
   }
 }]);

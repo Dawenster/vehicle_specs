@@ -32,17 +32,18 @@
 
 .top-call-to-action {
   margin: 20px 0px;
-  
-  .btn {
-    margin-right: 20px;
-  }
 }
 
 .bottom-call-to-action {
-  margin-top: 20px;
   margin-bottom: 100px;
+}
 
+.call-to-action-holder {
   .btn {
     margin-right: 20px;
+
+    i {
+      margin-right: 5px;
+    }
   }
 }
