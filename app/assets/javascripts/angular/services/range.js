@@ -25,7 +25,7 @@ app.factory("Range", function() {
     var ele = $($event.target)
     var selectedText = ele.text()
     var oldText = ele.parents(".dropdown-menu").siblings("button").text()
-    var dualRangeText = "Within (Dual range)"
+    var dualRangeText = Range.dualRangeText()
 
     ele.parents(".slider-dropdown").find(".button-text").text(selectedText)
 
@@ -112,7 +112,7 @@ app.factory("Range", function() {
       details["decimals"] = 0
     }
 
-    if (rangePrecision == "Within (Dual range)") {
+    if (rangePrecision == Range.dualRangeText()) {
       details["start"] = [spec.rangeDefault, spec.rangeDefaultMulti]
       details["connect"] = true
     } else {
@@ -171,6 +171,10 @@ app.factory("Range", function() {
         parentEle.find(".selected-text").text(value1)
       }
     });
+  }
+
+  Range.dualRangeText = function() {
+    return "Within (Dual range)"
   }
 
   return Range;

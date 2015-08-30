@@ -52,7 +52,20 @@
 
   .col-xs-12
     .main-spec-preview-holder ng-show="!showBuilder"
-      | Harro
+      table.table.table-striped.table-hover
+        thead
+          tr
+            th
+              | Spec
+            th
+              | Requirements
+            th
+              | Vendor comments
+        tbody
+          tr ng-repeat="spec in specs"
+            td
+              | {{spec.name}}
+
 
   .col-xs-12
     .bottom-call-to-action
