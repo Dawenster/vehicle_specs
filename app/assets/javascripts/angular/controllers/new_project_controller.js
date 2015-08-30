@@ -20,28 +20,40 @@ app.controller('NewProjectCtrl', ['$scope', function($scope) {
   $scope.dropdownSelected = function($event) {
     var ele = $($event.target)
     var selectedText = ele.text()
+    var oldText = ele.parents(".dropdown-menu").siblings("button").text()
+    var dualRangeText = "Within (Dual range)"
+
     ele.parents(".slider-dropdown").find(".button-text").text(selectedText)
 
-    var sliderHolder = ele.parents(".spec-content-holder")
-    var spec = specDetails(sliderHolder)
-    var slider = sliderHolder.find(".slider")
+    if (needsNewSlider(oldText, selectedText, dualRangeText)) {
+      var sliderHolder = ele.parents(".spec-content-holder")
+      var spec = specDetails(sliderHolder)
+      var slider = sliderHolder.find(".slider")
 
-    slider.after("<div class='slider'></div>")
-    var newSlider = slider.siblings(".slider")[0]
-    slider.remove()
+      slider.after("<div class='slider'></div>")
+      var newSlider = slider.siblings(".slider")[0]
+      slider.remove()
 
-    var dualRangeText = "Within (Dual range)"
-    var detailsForSlider = sliderDetails(spec, selectedText)
-    var textArea = sliderHolder.find(".selected-text")
+      var detailsForSlider = sliderDetails(spec, selectedText)
+      var textArea = sliderHolder.find(".selected-text")
 
-    if (selectedText == dualRangeText || detailsForSlider.steps > 10) {
-      createSlider(newSlider, spec, detailsForSlider, "count")
-      textArea.text(initialDualRangeTextWithUom(detailsForSlider.start, spec))
-    } else {
-      createSlider(newSlider, spec, detailsForSlider, "steps")
-      textArea.text(initialRangeTextWithUom(detailsForSlider.start, spec))
+      if (selectedText == dualRangeText || detailsForSlider.steps > 10) {
+        createSlider(newSlider, spec, detailsForSlider, "count")
+        textArea.text(initialDualRangeTextWithUom(detailsForSlider.start, spec))
+      } else {
+        createSlider(newSlider, spec, detailsForSlider, "steps")
+        textArea.text(initialRangeTextWithUom(detailsForSlider.start, spec))
+      }
+      initiateSliderUpdate(newSlider)
     }
-    initiateSliderUpdate(newSlider)
+  }
+
+  function needsNewSlider(oldText, selectedText, dualRangeText) {
+    if (oldText != selectedText && (oldText == dualRangeText || selectedText == dualRangeText)) {
+      return true
+    } else {
+      return false
+    }
   }
 
   function initialRangeTextWithUom(start, spec) {
