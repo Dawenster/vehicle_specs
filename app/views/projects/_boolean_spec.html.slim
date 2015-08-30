@@ -1,8 +1,16 @@
 .spec-content-holder
-  label.radio-inline
-    input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
-      | Yes
+  - if spec.boolean_default
+    label.radio-inline
+      input type="radio" name="#{spec.unique_id}" id="#{spec.unique_id}-true" value="option1" checked=""
+        | Yes
+    label.radio-inline
+      input type="radio" name="#{spec.unique_id}" id="#{spec.unique_id}-false" value="option2"
+        | No
 
-  label.radio-inline
-    input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"
-      | No
+  - else
+    label.radio-inline
+      input type="radio" name="#{spec.unique_id}" id="#{spec.unique_id}-true" value="option1"
+        | Yes
+    label.radio-inline
+      input type="radio" name="#{spec.unique_id}" id="#{spec.unique_id}-false" value="option2" checked=""
+        | No
