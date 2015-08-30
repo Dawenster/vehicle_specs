@@ -14,8 +14,14 @@
             a
               = precision
 
-    span.selected-text
-      - if spec.default_precision == "Within (Dual range)"
-        = "From: #{spec.range_default} to #{spec.range_default_multi} #{spec.uom_abbreviation}"
-      - else
-        = "#{spec.range_default} #{spec.uom_abbreviation}"
+    - if spec.unit_type == "Fraction"
+      span.selected-text
+        = spec.range_default
+      span.fraction-base
+        = "/#{spec.fraction_base} #{spec.uom_abbreviation}"
+    - else
+      span.selected-text
+        - if spec.default_precision == "Within (Dual range)"
+          = "From: #{spec.range_default} to #{spec.range_default_multi} #{spec.uom_abbreviation}"
+        - else
+          = "#{spec.range_default} #{spec.uom_abbreviation}"

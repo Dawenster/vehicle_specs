@@ -77,6 +77,14 @@ app.factory("Range", function() {
     return (spec.rangeMax - spec.rangeMin) / spec.rangeInterval
   }
 
+  function abbreviationForSlider(spec) {
+    if (spec.unitType == "Fraction") {
+      return " "
+    } else {
+      return " " + spec.uomAbbreviation
+    }
+  }
+
   function specDetails(slider) {
     var spec = {}
     spec["unitType"]          = slider.attr("data-unit-type")
@@ -133,7 +141,7 @@ app.factory("Range", function() {
       },
       format: wNumb({
         decimals: detailsForSlider.decimals,
-        postfix: ' ' + spec.uomAbbreviation
+        postfix: abbreviationForSlider(spec)
       })
     });
   }
