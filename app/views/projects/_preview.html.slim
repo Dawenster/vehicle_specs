@@ -1,0 +1,16 @@
+table.table.table-striped.table-hover
+  thead
+    tr
+      th
+        | Spec
+      th
+        | Requirements
+      th
+        | Vendor comments
+  tbody
+    tr ng-repeat="spec in specs"
+      td
+        | {{spec.specName}}
+      td
+        | {{spec.selection}}
+      td
