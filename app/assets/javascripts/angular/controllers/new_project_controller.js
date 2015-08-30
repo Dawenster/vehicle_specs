@@ -41,7 +41,7 @@ app.controller('NewProjectCtrl', ['$scope', 'Range', 'Dropdown', function($scope
       var specType = spec.attr("data-spec-type")
       switch (specType) {
         case "Range":
-          formattedSpecs.push({name: pullRangeSpecDetails(spec)})
+          formattedSpecs.push(pullRangeSpecDetails(spec))
           break;
         case "Dropdown":
           break;
@@ -53,6 +53,7 @@ app.controller('NewProjectCtrl', ['$scope', 'Range', 'Dropdown', function($scope
   }
 
   function pullRangeSpecDetails(spec) {
+    var specName = spec.attr("data-spec-name")
     var details = ""
     var buttonText = spec.find(".button-text").text()
     var selectionText = spec.find(".selected-text").text()
@@ -61,7 +62,10 @@ app.controller('NewProjectCtrl', ['$scope', 'Range', 'Dropdown', function($scope
     } else {
       details = buttonText + ": " + selectionText
     }
-    return details
+    return {
+      specName: specName,
+      selection: details
+    }
   }
 }]);
 
