@@ -37,7 +37,8 @@
                           - elsif spec.spec_type == "Boolean"
                             = render "boolean_spec", :spec => spec
 
-                    hr
+                    - unless spec == minor_section.specs.last
+                      hr
 
   .col-xs-12.col-sm-3 scrollspy=""
     = render "side_nav"
