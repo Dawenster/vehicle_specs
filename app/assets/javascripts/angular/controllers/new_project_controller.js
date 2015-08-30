@@ -1,6 +1,6 @@
 var app = angular.module('vehiclespec');
 
-app.controller('LandingCtrl', ['$scope', function($scope) {
+app.controller('NewProjectCtrl', ['$scope', function($scope) {
   var sliders = $(".slider")
 
   for (var i = 0; i < sliders.length; i++) {
