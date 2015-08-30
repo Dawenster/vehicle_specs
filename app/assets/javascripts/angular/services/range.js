@@ -1,23 +1,27 @@
 var app = angular.module('vehiclespec');
 
-app.controller('NewProjectCtrl', ['$scope', function($scope) {
-  var sliders = $(".slider")
+app.factory("Range", function() {
+  var Range = {};
 
-  for (var i = 0; i < sliders.length; i++) {
-    var sliderHolder = $(sliders[i]).parents(".spec-content-holder")
-    var spec = specDetails(sliderHolder)
-    var detailsForSlider = sliderDetails(spec, spec.rangePrecision)
+  Range.setupRangeSlider = function() {
+    var sliders = $(".slider")
 
-    if (detailsForSlider.steps > 10) {
-      createSlider(sliders[i], spec, detailsForSlider, "count")
-    } else {
-      createSlider(sliders[i], spec, detailsForSlider, "steps")
-    }
+    for (var i = 0; i < sliders.length; i++) {
+      var sliderHolder = $(sliders[i]).parents(".spec-content-holder")
+      var spec = specDetails(sliderHolder)
+      var detailsForSlider = sliderDetails(spec, spec.rangePrecision)
 
-    initiateSliderUpdate(sliders[i])
-  };
+      if (detailsForSlider.steps > 10) {
+        createSlider(sliders[i], spec, detailsForSlider, "count")
+      } else {
+        createSlider(sliders[i], spec, detailsForSlider, "steps")
+      }
 
-  $scope.rangeDropdownSelected = function($event) {
+      initiateSliderUpdate(sliders[i])
+    };
+  }
+
+  Range.rangeDropdownSelected = function($event) {
     var ele = $($event.target)
     var selectedText = ele.text()
     var oldText = ele.parents(".dropdown-menu").siblings("button").text()
@@ -160,4 +164,6 @@ app.controller('NewProjectCtrl', ['$scope', function($scope) {
       }
     });
   }
-}]);
+
+  return Range;
+});
