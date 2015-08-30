@@ -22,36 +22,8 @@
       padding: 20px;
 
       .spec-details-holder {
-        margin-top: 20px;
-
         .spec-content-holder {
           margin-top: 20px;
-
-          .below-slider-section {
-            margin-top: 60px;
-
-            .range-holder {
-              margin-left: 15px;
-            }
-
-            .slider-dropdown {
-              float: left;
-
-              .caret {
-                margin-left: 5px;
-              }
-
-              ul li {
-                cursor: pointer;
-              }
-            }
-
-            .selected-text {
-              margin-top: 8px;
-              margin-left: 5px;
-              float: left;
-            }
-          }
         }
       }
     }

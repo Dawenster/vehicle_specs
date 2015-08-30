@@ -4,3 +4,15 @@
   background-color: $custom1;
   border-color: $custom1;
 }
+
+.dropdown {
+  float: left;
+
+  .caret {
+    margin-left: 5px !important;
+  }
+
+  ul li {
+    cursor: pointer !important;
+  }
+}

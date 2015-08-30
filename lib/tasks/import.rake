@@ -90,7 +90,7 @@ def create_selection(spec, row)
   Selection.create(
     :name => row[:selection_name],
     :description => row[:selection_description],
-    :default => row[:selection_default],
+    :default => row[:selection_default] == "TRUE" ? true : false,
     :spec => spec
   )
 end
@@ -132,7 +132,8 @@ def row_hash(row)
   hash[:default_precision]     = row[column]
   column += 1
   hash[:comments]              = row[column]
-  column += 1
+  # Skip an extra column
+  column += 2
   hash[:selection_name]        = row[column]
   column += 1
   hash[:selection_description] = row[column]

@@ -1,1 +1,11 @@
 .spec-content-holder
+  .dropdown-dropdown.dropdown
+    button.btn.btn-primary id="#{spec.unique_id}" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
+      span.button-text
+        = spec.default_selection.try(:name)
+      span.caret
+    ul.dropdown-menu aria-labelledby="#{spec.unique_id}"
+      - spec.selections.each do |selection|
+        li ng-click="dropdownSelected($event)"
+          a
+            = selection.name

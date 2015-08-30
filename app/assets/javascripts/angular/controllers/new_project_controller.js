@@ -17,7 +17,7 @@ app.controller('NewProjectCtrl', ['$scope', function($scope) {
     initiateSliderUpdate(sliders[i])
   };
 
-  $scope.dropdownSelected = function($event) {
+  $scope.rangeDropdownSelected = function($event) {
     var ele = $($event.target)
     var selectedText = ele.text()
     var oldText = ele.parents(".dropdown-menu").siblings("button").text()
