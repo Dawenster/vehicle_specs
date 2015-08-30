@@ -1,0 +1,61 @@
+.row ng-controller="LandingCtrl"
+  .col-xs-12.col-sm-9
+    h1
+      | Municipal Vehicle Specs
+
+    h3
+      = @vehicle.name
+
+    #vehicle-accordion.panel-group aria-multiselectable="true" role="tablist" 
+      - @vehicle.major_sections.each_with_index do |major_section, i|
+        .panel.panel-default
+          .panel-heading aria-controls="collapse-#{i}" aria-expanded="true" data-toggle="collapse" href="#collapse-#{i}" role="button" id="#{major_section.unique_id}"
+            h4.panel-title
+              a
+                = major_section.name
+
+          .panel-collapse.collapse aria-labelledby="heading-#{i}" role="tabpanel" id="collapse-#{i}" class="#{'in' if i == 0}"
+            .panel-body
+              - major_section.minor_sections.each do |minor_section|
+                .minor-section-header id="#{minor_section.unique_id}"
+                  h5
+                    = minor_section.name
+
+                .specs-holder
+                  - minor_section.specs.each_with_index do |spec, spec_index|
+                    .row
+                      .col-xs-12.col-sm-6
+                        .spec-details-holder style="#{'margin-top: 0px;' if spec_index == 0}" id="#{spec.unique_id}"
+                          b
+                            = spec.name
+                          - if spec.spec_type == "Range"
+                            .spec-content-holder data-unit-type="#{spec.unit_type}" data-range-min="#{spec.range_min}" data-range-max="#{spec.range_max}" data-range-interval="#{spec.range_interval}" data-range-default="#{spec.range_default}" data-range-default-multi="#{spec.range_default_multi}" data-range-default-precision="#{spec.default_precision}" data-fraction-base="#{spec.fraction_base}" data-uom-abbreviation="#{spec.uom_abbreviation}"
+                              .range-holder
+                                .slider
+
+                              .below-slider-section
+                                .slider-dropdown.dropdown
+                                  button.btn.btn-primary id="#{'spec.id'}-#{i}" aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
+                                    span.button-text
+                                      = spec.default_precision
+                                    span.caret
+                                  ul.dropdown-menu aria-labelledby="#{'spec.id'}-#{i}"
+                                    - @range_precisions.each do |precision|
+                                      li ng-click="dropdownSelected($event)"
+                                        a
+                                          = precision
+
+                                span.selected-text
+                                  - if spec.default_precision == "Within (Dual range)"
+                                    = "From: #{spec.range_default} to #{spec.range_default_multi} #{spec.uom_abbreviation}"
+                                  - else
+                                    = "#{spec.range_default} #{spec.uom_abbreviation}"
+
+                          - else
+                            .spec-content-holder
+                              = ""
+
+                    hr
+
+  .col-xs-12.col-sm-3 scrollspy=""
+    = render "layouts/side_nav"
