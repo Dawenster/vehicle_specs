@@ -6,6 +6,9 @@
     h3
       = @vehicle.name
 
+    .top-call-to-action
+      = render "call_to_action"
+
     #vehicle-accordion.panel-group aria-multiselectable="true" role="tablist" 
       - @vehicle.major_sections.each_with_index do |major_section, i|
         .panel.panel-default
@@ -14,7 +17,8 @@
               a
                 = major_section.name
 
-          .panel-collapse.collapse aria-labelledby="heading-#{i}" role="tabpanel" id="collapse-#{i}" class="#{'in' if i == 0}"
+          / .panel-collapse.collapse aria-labelledby="heading-#{i}" role="tabpanel" id="collapse-#{i}" class="#{'in' if i == 0}"
+          .panel-collapse.collapse aria-labelledby="heading-#{i}" role="tabpanel" id="collapse-#{i}"
             .panel-body
               - major_section.minor_sections.each do |minor_section|
                 .minor-section-header id="#{minor_section.unique_id}"
@@ -39,6 +43,9 @@
 
                     - unless spec == minor_section.specs.last
                       hr
+
+    .bottom-call-to-action
+      = render "call_to_action"
 
   .col-xs-12.col-sm-3 scrollspy=""
     = render "side_nav"

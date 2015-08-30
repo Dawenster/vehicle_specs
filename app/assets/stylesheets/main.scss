@@ -1,8 +1,27 @@
 @import "colours.scss";
 
-.btn.btn-primary {
+.btn.btn-dropdown {
   background-color: $custom1;
   border-color: $custom1;
+  color: $text-on-custom1;
+
+  &:hover, &:focus, &:active, &:visited {
+    background-color: $main;
+    border-color: $main;
+    color: $text-on-main;
+  }
+}
+
+.btn.btn-dark {
+  background-color: $custom3;
+  border-color: $custom3;
+  color: $text-on-custom3;
+
+  &:hover, &:focus, &:active, &:visited {
+    background-color: $custom2;
+    border-color: $custom2;
+    color: $text-on-custom2;
+  }
 }
 
 .dropdown {
