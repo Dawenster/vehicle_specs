@@ -31,9 +31,8 @@
                           - if spec.spec_type == "Range"
                             = render "range_spec", :spec => spec
 
-                          - else
-                            .spec-content-holder
-                              = ""
+                          - elsif spec.spec_type == "Dropdown"
+                            = render "dropdown_spec"
 
                     hr
 
