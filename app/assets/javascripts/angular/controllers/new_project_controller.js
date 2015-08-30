@@ -1,8 +1,8 @@
 var app = angular.module('vehiclespec');
 
 app.controller('NewProjectCtrl', ['$scope', 'Range', 'Dropdown', function($scope, Range, Dropdown) {
-  // showFirstMajorSection()
-  hideSideNavMajorSections()
+  showFirstMajorSection()
+  // hideSideNavMajorSections()
   Range.setupRangeSlider()
 
   $scope.rangeDropdownSelected = function($event) {
