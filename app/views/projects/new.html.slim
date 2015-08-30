@@ -1,5 +1,5 @@
 .row ng-controller="NewProjectCtrl"
-  .col-xs-12.col-sm-9
+  .col-xs-12
     h1
       | Municipal Vehicle Specs
 
@@ -9,6 +9,7 @@
     .top-call-to-action
       = render "call_to_action"
 
+  .col-xs-12.col-sm-9
     #vehicle-accordion.panel-group aria-multiselectable="true" role="tablist" 
       - @vehicle.major_sections.each_with_index do |major_section, i|
         .panel.panel-default
