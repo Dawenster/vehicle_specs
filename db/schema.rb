@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150830185543) do
+ActiveRecord::Schema.define(version: 20150831050326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20150830185543) do
     t.string   "range_default_multi"
     t.string   "fraction_base"
     t.boolean  "boolean_default"
+    t.boolean  "contingency"
   end
 
   create_table "vehicles", force: true do |t|
