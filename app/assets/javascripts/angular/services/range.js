@@ -68,14 +68,6 @@ app.factory("Range", function() {
     return (spec.rangeMax - spec.rangeMin) / spec.rangeInterval
   }
 
-  function abbreviationForSlider(spec) {
-    if (spec.unitType == "Fraction") {
-      return " "
-    } else {
-      return " " + spec.uomAbbreviation
-    }
-  }
-
   function specDetails(slider) {
     var spec = {}
     spec["unitType"]          = slider.attr("data-unit-type")
@@ -132,36 +124,49 @@ app.factory("Range", function() {
       },
       format: wNumb({
         decimals: detailsForSlider.decimals,
-        postfix: abbreviationForSlider(spec)
+        postfix: " " + spec.uomAbbreviation
       })
     });
   }
 
   function initiateSliderUpdate(slider) {
     slider.noUiSlider.on('update', function(values, handle){
-      var parentEle = $(event.target).parents(".spec-content-holder")
-      var unitType = parentEle.attr("data-unit-type")
+      var sliderHolder = $(event.target).parents(".spec-content-holder")
+      var spec = specDetails(sliderHolder)
       var value1 = null
       var value2 = null
 
       if (values.length > 1) {
-        if (unitType == "Decimal") {
+
+        if (spec.unitType == "Decimal") {
           value1 = values[0]
           value2 = values[1]
         } else {
           value1 = roundWithUOM(values[0])
           value2 = roundWithUOM(values[1])
         }
-        parentEle.find(".selected-text").text("From: " + value1 + " to " + value2)
+
+        if (spec.unitType == "Fraction") {
+          sliderHolder.find(".selected-text").text("From: " + fractionText(value1, spec) + " to " + fractionText(value2, spec))
+        } else {
+          sliderHolder.find(".selected-text").text("From: " + value1 + " to " + value2)
+        }
+
       } else {
-        if (unitType == "Decimal") {
+
+        if (spec.unitType == "Decimal") {
           value1 = values[0]
         } else {
           value1 = roundWithUOM(values[0])
         }
-        parentEle.find(".selected-text").text(value1)
+        sliderHolder.find(".selected-text").text(value1)
+
       }
     });
+  }
+
+  function fractionText(str, spec) {
+    return str.replace(" " + spec.uomAbbreviation, "/" + spec.fractionBase + " " + spec.uomAbbreviation)
   }
 
   Range.dualRangeText = function() {
