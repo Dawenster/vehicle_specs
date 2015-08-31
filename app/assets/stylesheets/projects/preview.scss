@@ -1,0 +1,52 @@
+@import "colours.scss";
+
+.main-spec-preview-holder {
+  border: 1px solid $main;
+  border-radius: 5px;
+  margin-bottom: 20px;
+
+  .header-row {
+    background-color: $main;
+  }
+
+  .major-header {
+    padding: 10px 0px 10px 0px;
+
+    h4 {
+      margin: 0px;
+    }
+  }
+
+  .vendor-comments-header {
+    padding: 10px 10px 10px 0px;
+
+    h4 {
+      margin: 0px;
+    }
+  }
+
+  .minor-header {
+    padding: 10px 10px 10px 20px;
+    background-color: $secondary;
+
+    h5 {
+      margin: 0px;
+    }
+  }
+
+  .spec-row {
+    border-bottom: 1px solid $main;
+  }
+
+  .spec-row-cell {
+    padding: 10px;
+  }
+
+  .spec-row-left-cell {
+    padding-left: 20px;
+  }
+
+  .spec-row-right-cell {
+    border-right: 1px solid $main;
+  }
+}

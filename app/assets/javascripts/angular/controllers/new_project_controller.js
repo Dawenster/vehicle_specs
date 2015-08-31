@@ -26,7 +26,7 @@ app.controller('NewProjectCtrl', ['$scope', '$sce', 'Range', 'Dropdown', 'Previe
   
   $scope.preview = function() {
     $scope.showBuilder = false
-    $scope.specs = Preview.pullSpecDetails()
+    $scope.majorNames = Preview.pullSpecDetails()
   }
 
   $scope.selectionAsHtml = function(selection) {

@@ -1,4 +1,4 @@
-.spec-content-holder data-spec-type="#{spec.spec_type}" data-spec-name="#{spec.name}"
+.spec-content-holder data-spec-type="#{spec.spec_type}" data-spec-name="#{spec.name}" data-major-section-name="#{minor_section.major_section.name}" data-minor-section-name="#{minor_section.name}"
   - if spec.boolean_default
     label.radio-inline
       input.spec-radio type="radio" name="#{spec.unique_id}" id="#{spec.unique_id}-true" value="Yes" checked=""

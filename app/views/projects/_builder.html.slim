@@ -3,7 +3,7 @@
     .panel.panel-default
       .panel-heading aria-controls="collapse-#{i}" aria-expanded="true" data-toggle="collapse" href="#collapse-#{i}" role="button" id="#{major_section.unique_id}" data-parent="#vehicle-accordion"
         h4.panel-title
-          a
+          a.major-section-name
             = major_section.name
 
       / .panel-collapse.collapse aria-labelledby="heading-#{i}" role="tabpanel" id="collapse-#{i}"
@@ -11,7 +11,7 @@
         .panel-body
           - major_section.minor_sections.each do |minor_section|
             .minor-section-header id="#{minor_section.unique_id}"
-              h5
+              h5.minor-section-name data-major-section-name="#{major_section.name}"
                 = minor_section.name
 
             .specs-holder
@@ -23,13 +23,13 @@
                         b
                           = spec.name
                         - if spec.spec_type == "Range"
-                          = render "range_spec", :spec => spec
+                          = render "range_spec", :spec => spec, :minor_section => minor_section
 
                         - elsif spec.spec_type == "Dropdown"
-                          = render "dropdown_spec", :spec => spec
+                          = render "dropdown_spec", :spec => spec, :minor_section => minor_section
 
                         - elsif spec.spec_type == "Boolean"
-                          = render "boolean_spec", :spec => spec
+                          = render "boolean_spec", :spec => spec, :minor_section => minor_section
 
                     .col-xs-12.col-sm-6
                       .comment-area-holder

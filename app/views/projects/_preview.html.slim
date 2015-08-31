@@ -1,16 +1,24 @@
-table.table.table-striped.table-hover
-  thead
-    tr
-      th
-        | Spec
-      th
-        | Requirements
-      th
-        | Vendor comments
-  tbody
-    tr ng-repeat="spec in specs"
-      td
-        | {{spec.specName}}
-      td
-        div ng-bind-html="selectionAsHtml(spec.selection)"
-      td
+.row ng-repeat="majorName in majorNames"
+  .col-xs-12
+    .col-xs-7.header-row
+      .major-header
+        h4
+          | {{majorName.name}}
+
+    .col-xs-5.header-row
+      .vendor-comments-header
+        h4
+          | Vendor comments
+
+  .col-xs-12 ng-repeat="minorName in majorName.minorNames"
+    .minor-header
+      h5
+        | {{minorName.name}}
+
+    .col-xs-12 ng-repeat="spec in minorName.specs"
+      .row.spec-row
+        .col-xs-2.spec-row-cell.spec-row-left-cell
+          | {{spec.specName}}
+        .col-xs-5.spec-row-cell.spec-row-right-cell
+          div ng-bind-html="selectionAsHtml(spec.selection)"
+        .col-xs-5
