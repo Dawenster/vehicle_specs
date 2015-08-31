@@ -9,6 +9,9 @@ app.factory("Preview", ['Range', 'General', function(Range, General) {
 
     for (var i = 0; i < specs.length; i++) {
       var spec = $(specs[i])
+      if (spec.hasClass("remove-spec")) {
+        continue
+      }
       var specType = spec.attr("data-spec-type")
       var specObj = {}
       specObj["specName"] = spec.attr("data-spec-name")

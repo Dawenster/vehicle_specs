@@ -16,12 +16,13 @@
 
             .specs-holder
               - minor_section.specs.each_with_index do |spec, spec_index|
-                .spec-parent
+                .spec-parent class="#{'contingency-spec ' + spec.unique_id if spec.contingency}" data-spec-name="#{spec.name}" data-spec-unique-id="#{spec.unique_id}"
                   .row
                     .col-xs-12.col-sm-6
                       .spec-details-holder style="#{'margin-top: 0px;' if spec_index == 0}" id="#{spec.unique_id}"
                         b
                           = spec.name
+                        .contingency-explanation
                         - if spec.spec_type == "Range"
                           = render "range_spec", :spec => spec, :minor_section => minor_section
 
@@ -50,5 +51,5 @@
                             div
                               textarea.comment-text class="form-control" rows="3" placeholder="Comment"
 
-                - unless spec == minor_section.specs.last
-                  hr
+                  - unless spec == minor_section.specs.last
+                    hr
