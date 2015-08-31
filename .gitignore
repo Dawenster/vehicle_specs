@@ -17,3 +17,5 @@
 
 * Ignore data import files
 /db/vehicles/*
+
+*.dump
