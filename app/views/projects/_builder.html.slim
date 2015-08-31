@@ -16,38 +16,39 @@
 
             .specs-holder
               - minor_section.specs.each_with_index do |spec, spec_index|
-                .row
-                  .col-xs-12.col-sm-6
-                    .spec-details-holder style="#{'margin-top: 0px;' if spec_index == 0}" id="#{spec.unique_id}"
-                      b
-                        = spec.name
-                      - if spec.spec_type == "Range"
-                        = render "range_spec", :spec => spec
+                .spec-parent
+                  .row
+                    .col-xs-12.col-sm-6
+                      .spec-details-holder style="#{'margin-top: 0px;' if spec_index == 0}" id="#{spec.unique_id}"
+                        b
+                          = spec.name
+                        - if spec.spec_type == "Range"
+                          = render "range_spec", :spec => spec
 
-                      - elsif spec.spec_type == "Dropdown"
-                        = render "dropdown_spec", :spec => spec
+                        - elsif spec.spec_type == "Dropdown"
+                          = render "dropdown_spec", :spec => spec
 
-                      - elsif spec.spec_type == "Boolean"
-                        = render "boolean_spec", :spec => spec
+                        - elsif spec.spec_type == "Boolean"
+                          = render "boolean_spec", :spec => spec
 
-                  .col-xs-12.col-sm-6
-                    .comment-area-holder
-                      .action-links
-                        .comments-hidden
-                          a ng-click="addComment($event)"
-                            i.fa.fa-plus-circle
-                            | Add comment
+                    .col-xs-12.col-sm-6
+                      .comment-area-holder
+                        .action-links
+                          .comments-hidden
+                            a ng-click="addComment($event)"
+                              i.fa.fa-plus-circle
+                              | Add comment
 
-                        .comments-shown.hide
-                          label class="checkbox-inline"
-                            input.only-show-comment type="checkbox" value="true"
-                              | Only show comment
-                          a ng-click="removeComment($event)"
-                            i.fa.fa-minus-circle
-                            | Remove comment
+                          .comments-shown.hide
+                            label class="checkbox-inline"
+                              input.only-show-comment type="checkbox" value="true"
+                                | Only show comment
+                            a ng-click="removeComment($event)"
+                              i.fa.fa-minus-circle
+                              | Remove comment
 
-                          div
-                            textarea class="form-control" rows="3" placeholder="Comment"
+                            div
+                              textarea.comment-text class="form-control" rows="3" placeholder="Comment"
 
                 - unless spec == minor_section.specs.last
                   hr

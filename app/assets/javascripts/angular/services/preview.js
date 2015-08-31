@@ -23,6 +23,19 @@ app.factory("Preview", ['Range', function(Range) {
           specObj["selection"] = pullBooleanSpecDetails(spec)
           break;
       }
+
+      var commentsShown = spec.parents(".spec-parent").find(".comments-shown")
+      if (!commentsShown.hasClass("hide")) {
+        var comment = commentsShown.find(".comment-text").val().trim()
+        var onlyShowComment = commentsShown.find(".only-show-comment:checked").length > 0
+        if (comment != "") {
+          if (onlyShowComment) {
+            specObj["selection"] = comment
+          } else {
+            specObj["selection"] = specObj["selection"] + "<div>" + comment + "</div>"
+          }
+        }
+      }
       formattedSpecs.push(specObj)
     };
     return formattedSpecs

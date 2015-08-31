@@ -12,5 +12,5 @@ table.table.table-striped.table-hover
       td
         | {{spec.specName}}
       td
-        | {{spec.selection}}
+        div ng-bind-html="selectionAsHtml(spec.selection)"
       td

@@ -1,6 +1,6 @@
 var app = angular.module('vehiclespec');
 
-app.controller('NewProjectCtrl', ['$scope', 'Range', 'Dropdown', 'Preview', function($scope, Range, Dropdown, Preview) {
+app.controller('NewProjectCtrl', ['$scope', '$sce', 'Range', 'Dropdown', 'Preview', function($scope, $sce, Range, Dropdown, Preview) {
   showFirstMajorSection()
   // hideSideNavMajorSections()
   Range.setupRangeSlider()
@@ -27,6 +27,10 @@ app.controller('NewProjectCtrl', ['$scope', 'Range', 'Dropdown', 'Preview', func
   $scope.preview = function() {
     $scope.showBuilder = false
     $scope.specs = Preview.pullSpecDetails()
+  }
+
+  $scope.selectionAsHtml = function(selection) {
+    return $sce.trustAsHtml(selection);
   }
 
   $scope.backToBuild = function() {
