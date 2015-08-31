@@ -1,6 +1,6 @@
 var app = angular.module('vehiclespec');
 
-app.factory("Preview", ['Range', function(Range) {
+app.factory("Preview", ['Range', 'General', function(Range, General) {
   var Preview = {};
 
   Preview.pullSpecDetails = function() {
@@ -41,36 +41,27 @@ app.factory("Preview", ['Range', function(Range) {
       var majorName = spec.attr("data-major-section-name")
       var minorName = spec.attr("data-minor-section-name")
       
-      if (arrayHasKey(formattedSpecs, majorName).length == 0) {
+      if (General.arrayHasKey(formattedSpecs, majorName).length == 0) {
         formattedSpecs.push({
           name: majorName,
           minorNames: []
         })
       }
 
-      var majorNameObj = fetchObjInArray(formattedSpecs, majorName)
+      var majorNameObj = General.fetchObjInArray(formattedSpecs, majorName)
 
-      if (arrayHasKey(majorNameObj.minorNames, minorName).length == 0) {
+      if (General.arrayHasKey(majorNameObj.minorNames, minorName).length == 0) {
         majorNameObj.minorNames.push({
           name: minorName,
           specs: []
         })
       }
 
-      var minorNameObj = fetchObjInArray(majorNameObj.minorNames, minorName)
+      var minorNameObj = General.fetchObjInArray(majorNameObj.minorNames, minorName)
 
       minorNameObj.specs.push(specObj)
     };
     return formattedSpecs
-  }
-
-  function arrayHasKey(arr, key) {
-    return $.grep(arr, function(e){ return e.name == key; });
-  }
-
-  function fetchObjInArray(arr, key) {
-    var result = $.grep(arr, function(e){ return e.name == key; });
-    return result[0]
   }
 
   function pullRangeSpecDetails(spec) {
