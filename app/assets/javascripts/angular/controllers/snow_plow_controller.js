@@ -25,8 +25,7 @@ app.controller('SnowPlowController', ['$scope', 'General', function($scope, Gene
   // Allison brands only show if Allison selected
   var transmissionBrand = General.fetchObjInArray($scope.contingencies, "Transmission Brand")
   var allisonTransmission = General.fetchObjInArray($scope.contingencies, "Allison Transmission")
-  var explanation = "Select your Allison Transmission"
-  allisonTransmission.obj.find(".contingency-explanation").text(explanation)
+  contingencyLabelling("Select your Allison Transmission", allisonTransmission.obj)
 
   $(transmissionBrand.klass + " .button-text").bind("DOMSubtreeModified", function(event) {
     var selected = $(event.target).text()
@@ -38,4 +37,30 @@ app.controller('SnowPlowController', ['$scope', 'General', function($scope, Gene
       allisonTransmission.obj.find(".spec-content-holder").addClass("remove-spec")
     }
   })
+
+  // Pre-wetting tank size only show if Pre-wetting tank is true
+  var preWettingTanks = General.fetchObjInArray($scope.contingencies, "Pre-wetting tanks")
+  var preWettingTankSize = General.fetchObjInArray($scope.contingencies, "Pre-wetting tank size")
+  contingencyLabelling("Select your wetting tank size", preWettingTankSize.obj)
+  hidePreWettingSize()
+
+  $("body").on("change", preWettingTanks.obj.find('input.spec-radio'), function(event) {
+    var selected = $(event.target).val()
+    if (selected == "Yes") {
+      $(preWettingTankSize.klass).show()
+      preWettingTankSize.obj.find(".spec-content-holder").removeClass("remove-spec")
+    } else {
+      hidePreWettingSize()
+    }
+  })
+
+  function hidePreWettingSize() {
+    $(preWettingTankSize.klass).hide()
+    preWettingTankSize.obj.find(".spec-content-holder").addClass("remove-spec")
+  }
+
+  function contingencyLabelling(text, obj) {
+    var allisonExplanation = text
+    obj.find(".contingency-explanation").text(allisonExplanation)
+  }
 }]);
