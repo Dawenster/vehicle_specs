@@ -78,7 +78,8 @@ def find_or_create_spec(vehicle, major_section, minor_section, row)
       :unit_of_measure => row[:unit_of_measure],
       :uom_abbreviation => row[:uom_abbreviation],
       :default_precision => row[:default_precision],
-      :boolean_default => row[:boolean_default] == "TRUE" ? true : false,
+      :boolean_default => boolean_from_text(row[:boolean_default]),
+      :contingency => boolean_from_text(row[:contingency]),
       :comments => row[:comments],
       :vehicle => vehicle,
       :major_section => major_section,
@@ -91,9 +92,13 @@ def create_selection(spec, row)
   Selection.create(
     :name => row[:selection_name],
     :description => row[:selection_description],
-    :default => row[:selection_default] == "TRUE" ? true : false,
+    :default => boolean_from_text(row[:selection_default]),
     :spec => spec
   )
+end
+
+def boolean_from_text(text)
+  text == "TRUE"
 end
 
 def row_hash(row)
@@ -133,6 +138,8 @@ def row_hash(row)
   hash[:default_precision]     = row[column]
   column += 1
   hash[:boolean_default]       = row[column]
+  column += 1
+  hash[:contingency]           = row[column]
   column += 1
   hash[:comments]              = row[column]
   # Skip an extra column
