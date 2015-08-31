@@ -26,6 +26,32 @@
           margin-top: 20px;
         }
       }
+
+      .comment-area-holder {
+        .action-links {
+          text-align: right;
+          margin-bottom: 10px;
+
+          a {
+            cursor: pointer;
+            margin-left: 10px;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+            i {
+              margin-right: 2px;
+            }
+          }
+
+          textarea {
+            margin-top: 5px;
+          }
+        }
+      }
     }
   }
 }

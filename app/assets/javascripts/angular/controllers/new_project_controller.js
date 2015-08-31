@@ -78,6 +78,20 @@ app.controller('NewProjectCtrl', ['$scope', 'Range', 'Dropdown', function($scope
     var checkedValue = spec.find('input.spec-radio[type=radio]:checked').val()
     return checkedValue
   }
+
+  $scope.addComment = function($event) {
+    var commentsHidden = $($event.target).parents(".comments-hidden")
+    var commentsShown = commentsHidden.siblings(".comments-shown")
+    commentsHidden.addClass("hide")
+    commentsShown.removeClass("hide")
+  }
+
+  $scope.removeComment = function($event) {
+    var commentsShown = $($event.target).parents(".comments-shown")
+    var commentsHidden = commentsShown.siblings(".comments-hidden")
+    commentsShown.addClass("hide")
+    commentsHidden.removeClass("hide")
+  }
 }]);
 
 

@@ -30,5 +30,24 @@
                       - elsif spec.spec_type == "Boolean"
                         = render "boolean_spec", :spec => spec
 
+                  .col-xs-12.col-sm-6
+                    .comment-area-holder
+                      .action-links
+                        .comments-hidden
+                          a ng-click="addComment($event)"
+                            i.fa.fa-plus-circle
+                            | Add comment
+
+                        .comments-shown.hide
+                          label class="checkbox-inline"
+                            input.only-show-comment type="checkbox" value="true"
+                              | Only show comment
+                          a ng-click="removeComment($event)"
+                            i.fa.fa-minus-circle
+                            | Remove comment
+
+                          div
+                            textarea class="form-control" rows="3" placeholder="Comment"
+
                 - unless spec == minor_section.specs.last
                   hr
