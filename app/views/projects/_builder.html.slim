@@ -7,7 +7,8 @@
             = major_section.name
 
       / .panel-collapse.collapse aria-labelledby="heading-#{i}" role="tabpanel" id="collapse-#{i}"
-      .panel-collapse.collapse aria-labelledby="heading-#{i}" role="tabpanel" id="collapse-#{i}" class="#{'in' if i == 0}"
+      / .panel-collapse.collapse aria-labelledby="heading-#{i}" role="tabpanel" id="collapse-#{i}" class="#{'in' if i == 0}"
+      .panel-collapse.collapse aria-labelledby="heading-#{i}" role="tabpanel" id="collapse-#{i}"
         .panel-body
           - major_section.minor_sections.each do |minor_section|
             .minor-section-header id="#{minor_section.unique_id}"
