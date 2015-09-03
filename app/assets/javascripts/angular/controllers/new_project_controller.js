@@ -1,7 +1,7 @@
 var app = angular.module('vehiclespec');
 
 app.controller('NewProjectCtrl', ['$scope', '$sce', 'Range', 'Dropdown', 'Preview', function($scope, $sce, Range, Dropdown, Preview) {
-  showFirstMajorSection()
+  // showFirstMajorSection()
   // hideSideNavMajorSections()
   Range.setupRangeSlider()
 
