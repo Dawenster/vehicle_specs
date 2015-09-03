@@ -1,7 +1,7 @@
 #vehicle-accordion.panel-group aria-multiselectable="true" role="tablist" 
   - @vehicle.major_sections.each_with_index do |major_section, i|
     .panel.panel-default
-      .panel-heading aria-controls="collapse-#{i}" aria-expanded="true" data-toggle="collapse" href="#collapse-#{i}" role="button" id="#{major_section.unique_id}" data-parent="#vehicle-accordion"
+      .panel-heading.collapsed aria-controls="collapse-#{i}" aria-expanded="true" data-toggle="collapse" href="#collapse-#{i}" role="button" id="#{major_section.unique_id}" data-parent="#vehicle-accordion"
         h4.panel-title
           a.major-section-name
             = major_section.name
@@ -15,8 +15,7 @@
 
               - major_section.minor_sections.each_with_index do |minor_section, minor_index|
 
-
-                .minor-section-header.panel-heading aria-controls="collapse-#{minor_section.unique_id}-#{minor_index}" aria-expanded="true" data-toggle="collapse" href="#collapse-#{minor_section.unique_id}-#{minor_index}" role="button" data-parent="##{major_section.unique_id}-accordion" id="#{minor_section.unique_id}"
+                .minor-section-header.panel-heading.collapsed aria-controls="collapse-#{minor_section.unique_id}-#{minor_index}" aria-expanded="true" data-toggle="collapse" href="#collapse-#{minor_section.unique_id}-#{minor_index}" role="button" data-parent="##{major_section.unique_id}-accordion" id="#{minor_section.unique_id}"
                   h5.minor-section-name data-major-section-name="#{major_section.name}"
                     = minor_section.name
 

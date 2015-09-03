@@ -23,4 +23,54 @@ app.controller('SideBarNavCtrl', ['$scope', function($scope) {
   //     $(".side-nav-holder").find("." + majorSectionId).slideUp("fast")
   //   }
   // })
+
+  $("body").on("click", ".side-nav-main-holder", function(e) {
+    e.preventDefault()
+    var ele = $(e.target)
+
+    if (ele.hasClass("spec-link")) {
+      var majorSectionLink = ele.parents(".major-section-side-nav").find("a.major-section-link").attr("href")
+      var majorSection = $(majorSectionLink)
+      var minorSectionLink = ele.parents(".minor-section-side-nav").find("a.minor-section-link").attr("href")
+      var minorSection = $(minorSectionLink)
+      var specLink = ele.attr("href")
+
+      openMajorSection(majorSection)
+      openMinorSection(minorSection)
+      delayedGoToLink(specLink)
+
+    } else if (ele.hasClass("minor-section-link")) {
+      var majorSectionLink = ele.parents(".major-section-side-nav").find("a.major-section-link").attr("href")
+      var majorSection = $(majorSectionLink)
+      var minorSectionLink = ele.attr("href")
+      var minorSection = $(minorSectionLink)
+
+      openMajorSection(majorSection)
+      openMinorSection(minorSection)
+      delayedGoToLink(minorSectionLink)
+      
+    } else {
+      var majorSectionLink = ele.attr("href")
+      var majorSection = $(majorSectionLink)
+
+      openMajorSection(majorSection)
+      delayedGoToLink(majorSectionLink)
+    }
+  })
+
+  function openMajorSection(majorSection) {
+    if (majorSection.hasClass("collapsed")) {
+      majorSection.click()
+    }
+  }
+
+  function openMinorSection(minorSection) {
+    if (minorSection.hasClass("collapsed")) {
+      minorSection.click()
+    }
+  }
+
+  function delayedGoToLink(link) {
+    setTimeout( function() {$(link).scrollToMe();}, 500 );
+  }
 }]);

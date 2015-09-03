@@ -17,3 +17,9 @@
 //= require turbolinks
 //= require angular
 //= require_tree .
+
+jQuery.fn.extend({
+ scrollToMe: function () {
+   var x = jQuery(this).offset().top - 20;
+   jQuery('html,body').animate({scrollTop: x}, 500);
+}});
