@@ -6,51 +6,58 @@
           a.major-section-name
             = major_section.name
 
-      / .panel-collapse.collapse aria-labelledby="heading-#{i}" role="tabpanel" id="collapse-#{i}"
       / .panel-collapse.collapse aria-labelledby="heading-#{i}" role="tabpanel" id="collapse-#{i}" class="#{'in' if i == 0}"
       .panel-collapse.collapse aria-labelledby="heading-#{i}" role="tabpanel" id="collapse-#{i}"
         .panel-body
-          - major_section.minor_sections.each do |minor_section|
-            .minor-section-header id="#{minor_section.unique_id}"
-              h5.minor-section-name data-major-section-name="#{major_section.name}"
-                = minor_section.name
 
-            .specs-holder
-              - minor_section.specs.each_with_index do |spec, spec_index|
-                .spec-parent class="#{'contingency-spec ' + spec.unique_id if spec.contingency}" data-spec-name="#{spec.name}" data-spec-unique-id="#{spec.unique_id}"
-                  .row
-                    .col-xs-12.col-sm-6
-                      .spec-details-holder style="#{'margin-top: 0px;' if spec_index == 0}" id="#{spec.unique_id}"
-                        b
-                          = spec.name
-                        .contingency-explanation
-                        - if spec.spec_type == "Range"
-                          = render "range_spec", :spec => spec, :minor_section => minor_section
+          .panel-group.nested-panel-group aria-multiselectable="true" role="tablist" id="#{major_section.unique_id}-accordion"
+            .panel.panel-default.nested-panel
 
-                        - elsif spec.spec_type == "Dropdown"
-                          = render "dropdown_spec", :spec => spec, :minor_section => minor_section
+              - major_section.minor_sections.each_with_index do |minor_section, minor_index|
 
-                        - elsif spec.spec_type == "Boolean"
-                          = render "boolean_spec", :spec => spec, :minor_section => minor_section
 
-                    .col-xs-12.col-sm-6
-                      .comment-area-holder
-                        .action-links
-                          .comments-hidden
-                            a ng-click="addComment($event)"
-                              i.fa.fa-plus-circle
-                              | Add comment
+                .minor-section-header.panel-heading aria-controls="collapse-#{minor_section.unique_id}-#{minor_index}" aria-expanded="true" data-toggle="collapse" href="#collapse-#{minor_section.unique_id}-#{minor_index}" role="button" data-parent="##{major_section.unique_id}-accordion" id="#{minor_section.unique_id}"
+                  h5.minor-section-name data-major-section-name="#{major_section.name}"
+                    = minor_section.name
 
-                          .comments-shown.hide
-                            label class="checkbox-inline"
-                              input.only-show-comment type="checkbox" value="true"
-                                | Only show comment
-                            a ng-click="removeComment($event)"
-                              i.fa.fa-minus-circle
-                              | Remove comment
+                .panel-collapse.collapse aria-labelledby="heading-#{minor_section.unique_id}-#{minor_index}" role="tabpanel" id="collapse-#{minor_section.unique_id}-#{minor_index}"
+                  .panel-body
+                    .specs-holder
+                      - minor_section.specs.each_with_index do |spec, spec_index|
+                        .spec-parent class="#{'contingency-spec ' + spec.unique_id if spec.contingency}" data-spec-name="#{spec.name}" data-spec-unique-id="#{spec.unique_id}"
+                          .row
+                            .col-xs-12.col-sm-6
+                              .spec-details-holder style="#{'margin-top: 0px;' if spec_index == 0}" id="#{spec.unique_id}"
+                                b
+                                  = spec.name
+                                .contingency-explanation
+                                - if spec.spec_type == "Range"
+                                  = render "range_spec", :spec => spec, :minor_section => minor_section
 
-                            div
-                              textarea.comment-text class="form-control" rows="3" placeholder="Comment"
+                                - elsif spec.spec_type == "Dropdown"
+                                  = render "dropdown_spec", :spec => spec, :minor_section => minor_section
 
-                  - unless spec == minor_section.specs.last
-                    hr
+                                - elsif spec.spec_type == "Boolean"
+                                  = render "boolean_spec", :spec => spec, :minor_section => minor_section
+
+                            .col-xs-12.col-sm-6
+                              .comment-area-holder
+                                .action-links
+                                  .comments-hidden
+                                    a ng-click="addComment($event)"
+                                      i.fa.fa-plus-circle
+                                      | Add comment
+
+                                  .comments-shown.hide
+                                    label class="checkbox-inline"
+                                      input.only-show-comment type="checkbox" value="true"
+                                        | Only show comment
+                                    a ng-click="removeComment($event)"
+                                      i.fa.fa-minus-circle
+                                      | Remove comment
+
+                                    div
+                                      textarea.comment-text class="form-control" rows="3" placeholder="Comment"
+
+                          - unless spec == minor_section.specs.last
+                            hr
